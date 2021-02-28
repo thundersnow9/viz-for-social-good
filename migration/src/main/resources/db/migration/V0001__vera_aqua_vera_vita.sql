@@ -1,1 +1,1 @@
--- hello world
+create table if not exists
