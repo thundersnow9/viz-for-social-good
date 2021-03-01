@@ -1,5 +1,5 @@
-create role readonly login;
-create role readwrite login;
+-- create role readonly login;
+-- create role readwrite login;
 
 alter default privileges for role merrowa
     grant select on tables to readonly;

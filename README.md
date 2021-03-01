@@ -10,8 +10,7 @@ alter role merrowa with superuser;
 ```
 
 ```properties
-flyway.url=localhost
-flyway.database=merrowa
+flyway.url=jdbc:postgresql://localhost:5435/merrowa?tcpKeepAlive=true
 flyway.user=merrowa
 flyway.schemas=public
 ```
