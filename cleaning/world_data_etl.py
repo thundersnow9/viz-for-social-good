@@ -73,21 +73,10 @@ if __name__ == '__main__':
             healthcare_facilities_cleaning]
 
 
-    def expand_column_name(name):
-        expanded_name = ''
-        split = name.split('_')
-        for n in split:
-            if n in long_names.keys():
-                expanded_name += long_names[n]
-            else:
-                expanded_name += n
-            expanded_name += ' '
+    def functional_expand_column_name(name):
+        return ' '.join(map(lambda n: long_names[n] if n in long_names.keys() else n, name.split('_'))).title()
 
-        return expanded_name.title().strip()
-
-
-    for df in data:
-        df.rename({k: expand_column_name(k) for k in df.keys()}, axis='columns', inplace=True)
+    list(map(lambda df: df.rename({k: functional_expand_column_name(k) for k in df.keys()}, axis='columns', inplace=True), data))
 
     household_hygiene.to_sql(name='household_hygiene', con=engine, if_exists='replace')
     household_sanitation.to_sql(name='household_sanitation', con=engine, if_exists='replace')
