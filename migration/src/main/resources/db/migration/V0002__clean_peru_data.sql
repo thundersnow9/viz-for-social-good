@@ -46,3 +46,11 @@ where _peru.category = s.category
   and _peru.metric = s.metric
   and _peru.metric_description = s.metric_description
   and _peru.location = s.location;
+
+alter table piura_region_of_peru_survey_data_scrubbing
+    add column raw_value numeric;
+
+update piura_region_of_peru_survey_data_scrubbing
+set raw_value = replace(replace(raw_data,'%',''),'$','')::numeric
+where raw_data <> 'Raw Data = Response Data'
+  and response > 0;
